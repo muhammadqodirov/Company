@@ -1,9 +1,16 @@
 from django.shortcuts import render, redirect
-from .models import Messages
+from .models import Messages, Courses, Sections
 
 
 def index(request):
     return render(request, 'index.html')
+
+def services(request):
+    return render(request, 'services.html', context={'courses': Courses.objects.all()})
+
+def features(request,id):
+    sections = Sections.objects.filter(course_id=id)
+    return render(request, 'features.html', context={'sections': sections})
 
 
 def contact(request):
